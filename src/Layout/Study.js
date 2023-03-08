@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import { readDeck } from "../utils/api";
+import NavBar from "./NavBar";
 import StudyCard from "./StudyCard";
 
 function Study() {
@@ -29,15 +30,18 @@ function Study() {
         }
         loadDeck();
     }, [deckId])
-
+    
 
     return (
         <>
-            <NavLink to="/">Home</NavLink> / 
+        <nav aria-label="breadcrumb">
+            <ol className="breadcrumb"><NavBar linksToRender={[{url: "/", name:"Home"}, {url: `/decks/${deckId}`, name:`${deckObj.name}`}, {url: "", name:"Study"}, ]}/></ol>
+        </nav>
+            {/* <NavLink to="/">Home</NavLink> / 
             <NavLink exact to={`/decks/${deckId}`}>/{name}</NavLink> / 
             <NavLink to="study" className={isActive =>
                 (isActive ? " active-link" : "")
-            }>/Study</NavLink>
+            }>/Study</NavLink> */}
 
             <h1>{name}</h1>
 
