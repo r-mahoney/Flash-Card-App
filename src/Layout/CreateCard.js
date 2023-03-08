@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { useParams, useRouteMatch } from "react-router-dom";
+import NavBar from "./NavBar";
 import CardForm from "./CardForm";
 import { readCard, readDeck } from "../utils/api";
 
 function CreateCard() {
-    const {path} = useRouteMatch();
+    const { path } = useRouteMatch();
     const { deckId, cardId } = useParams();
     const [{ name }, setDeckObj] = useState({})
     const [card, setCard] = useState({})
@@ -25,14 +26,15 @@ function CreateCard() {
 
     return (
         <>
-            <NavLink to="/">Home</NavLink> / 
-            <NavLink exact to={`/decks/${deckId}`}>{name}</NavLink> / 
-            <NavLink exact to={`/decks/${deckId}/cards/${cardId}/edit`}>Add Card</NavLink>
+            <nav aria-label="breadcrumb">
+                <ol className="breadcrumb"><NavBar linksToRender={[{ url: "/", name: "Home" }, { url: `/decks/${deckId}`, name: `${name}`}, {url:`/decks/${deckId}/cards/${cardId}/edit`, name:"Add Card"}]} path={path}/></ol>
+            </nav>
+
             <div>
                 <h3>{`${name}`}</h3>
             </div>
 
-            {!isLoading && <CardForm deckId={deckId} card={card}/>}
+            {!isLoading && <CardForm deckId={deckId} card={card} />}
         </>
     )
 }

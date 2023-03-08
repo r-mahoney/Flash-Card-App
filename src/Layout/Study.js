@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, useParams, useRouteMatch } from "react-router-dom";
 import { readDeck } from "../utils/api";
 import NavBar from "./NavBar";
 import StudyCard from "./StudyCard";
 
 function Study() {
+    const {path} = useRouteMatch();
     const { deckId } = useParams();
     const [cards, setCards] = useState([]);
     const [deckObj, setDeckObj] = useState({})
@@ -37,13 +38,8 @@ function Study() {
         <nav aria-label="breadcrumb">
             <ol className="breadcrumb"><NavBar linksToRender={[{url: "/", name:"Home"}, {url: `/decks/${deckId}`, name:`${deckObj.name}`}, {url: "", name:"Study"}, ]}/></ol>
         </nav>
-            {/* <NavLink to="/">Home</NavLink> / 
-            <NavLink exact to={`/decks/${deckId}`}>/{name}</NavLink> / 
-            <NavLink to="study" className={isActive =>
-                (isActive ? " active-link" : "")
-            }>/Study</NavLink> */}
 
-            <h1>{name}</h1>
+            <h1>{name} : Study</h1>
 
             {cards.length >= 3 ? (cards.map((card, index) => <StudyCard card={card}
                 index={index} key={card.id}
