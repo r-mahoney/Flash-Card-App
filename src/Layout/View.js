@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, Route, Switch, useHistory, useParams } from "react-router-dom";
-import { createDeck, deleteCard, readDeck } from "../utils/api";
-import "./NavLink.css"
+import { Link, useHistory, useParams } from "react-router-dom";
+import { deleteCard, readDeck } from "../utils/api";
+import NavBar from "./NavBar";
 import ViewCard from "./ViewCard";
 
 function View() {
@@ -34,10 +34,9 @@ function View() {
     } else {
         return (
             <>
-                <NavLink to="/">Home</NavLink> / 
-                <NavLink to={`${deckId}`} className={isActive =>
-                    (isActive ? " active-link" : "")
-                }>{name}</NavLink>
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb"><NavBar linksToRender={[{ url: "/", name: "Home" }, { url: `/decks/${deckId}`, name: `${deckObj.name}` }]} /></ol>
+                </nav>
                 <div>
                     <h4>{name}</h4>
                     <p>{description}</p>
