@@ -1,0 +1,7 @@
+input, textarea, form {
+    display: block;
+}
+
+input, textarea {
+    width: 100%;
+}

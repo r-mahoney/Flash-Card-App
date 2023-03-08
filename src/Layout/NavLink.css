@@ -1,0 +1,5 @@
+.active-link {
+    pointer-events: none;
+    text-decoration: none;
+    color: grey;
+}
