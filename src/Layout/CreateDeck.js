@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { useParams, useRouteMatch } from "react-router-dom";
 import { readDeck } from "../utils/api";
 import Form from "./Form";
+import NavBar from "./NavBar";
 import "./CreateDeck.css"
 
 function CreateDeck({ deckList }) {
@@ -11,7 +12,7 @@ function CreateDeck({ deckList }) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        path.includes("edit") ? readDeck(deckId).then(data => setDeckObj(data)).then(()=> setIsLoading(false)) : setIsLoading(false)
+        path.includes("edit") ? readDeck(deckId).then(data => setDeckObj(data)).then(() => setIsLoading(false)) : setIsLoading(false)
     }, [deckId])
 
 
@@ -19,15 +20,15 @@ function CreateDeck({ deckList }) {
 
     return (
         <>
-            <NavLink to="/">Home</NavLink> / 
-            <NavLink exact to={`/decks/${deckId}`} isActive={() => [`/decks/${deckId}`, '/decks/new'].includes(path)} className={isActive =>
-                (isActive ? " active-link" : "")}>{path.includes("edit") ? `/${deckObj.name}` : "/Create Deck"}</NavLink> / 
-            {path.includes("edit") && <NavLink to="edit" className={isActive =>
-                (isActive ? " active-link" : "")
-            }>/Edit Deck</NavLink>}
+            <nav aria-label="breadcrumb">
+                <ol className="breadcrumb"><NavBar linksToRender={path.includes("edit") ?
+                    [{ url: "/", name: "Home" }, { url: `/decks/${deckId}`, name: `${deckObj.name}` }, { url: `/decks/${deckId}/edit`, name: "Edit Deck" }]
+                    :[{ url: "/", name: "Home" }, { url: `/decks/edit`, name: "Add Deck" }]
+            } path={path} /></ol>
+            </nav>
             <h1>{path.includes("edit") ? "Edit Deck" : "Create Deck"}</h1>
             {!isLoading && <Form path={path} deckId={deckId} deck={deckObj} deckList={deckList} />}
-            
+
         </>
     )
 }

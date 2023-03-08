@@ -27,7 +27,10 @@ function CreateCard() {
     return (
         <>
             <nav aria-label="breadcrumb">
-                <ol className="breadcrumb"><NavBar linksToRender={[{ url: "/", name: "Home" }, { url: `/decks/${deckId}`, name: `${name}`}, {url:`/decks/${deckId}/cards/${cardId}/edit`, name:"Add Card"}]} path={path}/></ol>
+                <ol className="breadcrumb"><NavBar linksToRender={path.includes("edit") ?
+                    [{ url: "/", name: "Home" }, { url: `/decks/${deckId}`, name: `${name}` }, { url: `/decks/${deckId}/cards/${cardId}/edit`, name: "Edit Card" }]
+                    : [{ url: "/", name: "Home" }, { url: `/decks/${deckId}`, name: `${name}` }, { url: `/decks/${deckId}/cards/edit`, name: "Add Card" }]
+                } path={path} /></ol>
             </nav>
 
             <div>
