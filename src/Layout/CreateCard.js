@@ -22,7 +22,8 @@ function CreateCard() {
 
     useEffect(() => {
         path.includes("edit") ? readCard(cardId).then(data => setCard(data)).then(() => setIsLoading(false)) : setIsLoading(false)
-    }, [cardId])
+        // similar to deck form, create a loading variable and change it to false after weve fetched the data if were editing otherwise just set it to false
+    }, [cardId, path])
 
     return (
         <>

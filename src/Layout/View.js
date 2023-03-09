@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory, useParams, useRouteMatch } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { deleteCard, readDeck } from "../utils/api";
 import NavBar from "./NavBar";
 import ViewCard from "./ViewCard";
 
 function View() {
-    const { path } = useRouteMatch();
     const history = useHistory();
     const { deckId } = useParams();
     const [cards, setCards] = useState([]);

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 function StudyCard({ card, index, cardShowing, nextHandler, flipHandler, isFlipped, length }) {
 
     return (
-        (cardShowing === index) && <div className="card" key={card.id} style={{ margin: "5px 0" }}>
+        (cardShowing === index) && <div className="card" style={{ margin: "5px 0" }}>
             <h4 style={{margin:"0 10px", padding:"20px 20px 0 20px"}}>Card {index + 1} of {length}</h4>
             <div className="card-body" style={{ display: "flex" }}>
                 {!isFlipped && <div className="left-side" style={{ flex: "1", margin: "0 10px" }}>

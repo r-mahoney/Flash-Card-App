@@ -25,11 +25,15 @@ function Form({ path, deck, deckId, deckList}) {
             deck.name = formData.name;
             deck.description = formData.description;
             updateDeck(deck);
+            // if youre editing a deck, set the deck info to be the fform info and then update the deck with the new info
             history.push(`/decks/${deckId}`)
         } else {
             await createDeck(formData);
+            //if youre creating, just create a new deck with the form info
             setFormData({ ...initialFormState });
             history.push(`/decks/${deckList.length + 1}`)
+            // using decklist.length + 1 to get to the newly created deck page
+            // this is typically /decks/${deckId} but in  theory we dont know the ID of teh newly created deck, but we do know its appended to the end off the array
         }
     }
     

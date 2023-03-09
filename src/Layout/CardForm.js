@@ -29,9 +29,11 @@ function CardForm({ deckId, card }) {
             card.front = formData.front;
             card.back = formData.back;
             updateCard(card)
+            // again, similar to create deck, set card data to fom data and then update card if editing
             history.push(`/decks/${deckId}`)
         } else {
             await createCard(deckId, formData);
+            // create card in specific deck with the current form data
             setFormData({ ...initialFormState })
             history.push(`/decks/${deckId}`);
         }
